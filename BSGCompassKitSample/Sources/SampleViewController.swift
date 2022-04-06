@@ -35,7 +35,7 @@ final class SampleViewController: UIViewController {
         
         createNeedleCompass()
         createCircleCompass()
-        //startHeadings()
+        startHeadings()
     }
 }
 

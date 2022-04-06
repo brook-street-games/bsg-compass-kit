@@ -81,10 +81,12 @@ extension CircularSpeedometerView {
     
     public func setSpeed(_ speed: Double, animated: Bool) {
         
-        primaryLabel.text = getString(from: speed)
+        let confinedSpeed = speed.confine(to: 0...maxSpeed)
+        
+        primaryLabel.text = getString(from: confinedSpeed)
         secondaryLabel.text = measurementSystem.unitOfSpeed
         
-        let speedCenter = speed / maxSpeed
+        let speedCenter = confinedSpeed / maxSpeed
         
         if animated {
             adjustNeedle(center: speedCenter)

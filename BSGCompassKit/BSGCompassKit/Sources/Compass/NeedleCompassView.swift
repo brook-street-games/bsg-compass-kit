@@ -15,8 +15,11 @@ public final class NeedleCompassView: UIView, Compass {
     
     // MARK: - Properties -
     
+    /// The color of the compass needle.
     public var needleColor: UIColor = .label
-    public var font: UIFont = .systemFont(ofSize: 24)
+    /// The name of a custom font to use.
+    public var customFontName: String?
+    /// The text color.
     public var textColor: UIColor = .systemBackground
     
     // MARK: - UI -
@@ -26,7 +29,7 @@ public final class NeedleCompassView: UIView, Compass {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = textColor
-        label.font = font
+        label.font = getFont(size: bounds.width * 0.20)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

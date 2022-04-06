@@ -20,12 +20,10 @@ public class CircularGaugeView: UIView, Gauge {
     public var borderWidth: CGFloat = 5.0
     /// The color of the background area within the circle.
     public var fillColor: UIColor = .systemBackground
-    /// The font of the primary label.
-    public var primaryFont: UIFont = .systemFont(ofSize: 36)
+    /// The name of a custom font to use.
+    public var customFontName: String?
     /// The color of the primary label.
     public var primaryTextColor: UIColor = .label
-    /// The font of the secondary label.
-    public var secondaryFont: UIFont = .systemFont(ofSize: 12)
     /// The color of the secondary label.
     public var secondaryTextColor: UIColor = .label
     /// The color of the indicator tick marks.
@@ -39,7 +37,7 @@ public class CircularGaugeView: UIView, Gauge {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = primaryFont
+        label.font = getFont(size: bounds.width * 0.30)
         label.textColor = primaryTextColor
         return label
     }()
@@ -48,7 +46,7 @@ public class CircularGaugeView: UIView, Gauge {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = secondaryFont
+        label.font = getFont(size: bounds.width * 0.12)
         label.textColor = secondaryTextColor
         return label
     }()
