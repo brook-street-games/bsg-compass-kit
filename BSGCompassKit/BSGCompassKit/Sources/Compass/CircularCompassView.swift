@@ -17,16 +17,6 @@ public final class CircularCompassView: CircularGaugeView, Compass {
     
     private(set) public var degrees: Double = 0.0
     
-    // MARK: - Initializers -
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Setup -
     
     override func setup() {
@@ -67,10 +57,6 @@ public final class CircularCompassView: CircularGaugeView, Compass {
         needleShapeLayer.strokeEnd = 0
         needleShapeLayer.zPosition = 1
         layer.addSublayer(needleShapeLayer)
-    }
-    
-    override func update() {
-        setHeading(degrees: degrees, animated: false)
     }
 }
 

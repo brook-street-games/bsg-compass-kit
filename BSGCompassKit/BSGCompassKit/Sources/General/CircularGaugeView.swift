@@ -10,11 +10,7 @@ import UIKit
 ///
 /// Base class for circular gauges.
 ///
-public class CircularGaugeView: UIView, Gauge {
-    
-    // MARK: - Conformance Properties -
-    
-    public var customFontName: String?
+public class CircularGaugeView: GaugeView {
     
     // MARK: - Properties -
     
@@ -39,7 +35,7 @@ public class CircularGaugeView: UIView, Gauge {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFont(size: bounds.width * 0.30)
+        label.font = getFont(size: bounds.width * 0.24)
         label.textColor = primaryTextColor
         return label
     }()
@@ -61,23 +57,9 @@ public class CircularGaugeView: UIView, Gauge {
         return layer
     }()
     
-    // MARK: - Initializers -
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Setup -
     
-    public override func didMoveToSuperview() {
-        setup()
-    }
-    
-    func setup() {
+    override func setup() {
         
         createBorder()
         createLabels()
@@ -118,5 +100,4 @@ public class CircularGaugeView: UIView, Gauge {
     
     func createTicks(color: UIColor) {}
     func createNeedle(color: UIColor) {}
-    func update() {}
 }

@@ -13,19 +13,32 @@ import BSGCompassKit
 ///
 final class SampleViewController: UIViewController {
     
-    // MARK: - Properties -
-    
-    /// A compass with the needle style.
-    private var needleCompassView: NeedleCompassView!
-    /// A compass with the circular style.
-    private var circleCompassView: CircularCompassView!
-    
     // MARK: - UI -
     
     /// The area that hosts *needleCompassView*
-    @IBOutlet private weak var needleCompassContainer: UIView!
+    @IBOutlet private weak var arrowCompassContainer: UIView!
     /// The area that hosts *circleCompassView*
-    @IBOutlet private weak var circleCompassContainer: UIView!
+    @IBOutlet private weak var circularCompassContainer: UIView!
+    
+    /// A compass with the arrow style.
+    private var arrowCompassView: ArrowCompassView = {
+        
+        let compassView = ArrowCompassView()
+        return compassView
+    }()
+    
+    /// A compass with the circular style.
+    private var circularCompassView: CircularCompassView = {
+        
+        let compassView = CircularCompassView()
+        compassView.borderColor = .black
+        compassView.fillColor = .black
+        compassView.tickColor = .yellow
+        compassView.primaryTextColor = .white
+        compassView.secondaryTextColor = .white
+        compassView.needleColor = .white
+        return compassView
+    }()
     
     // MARK: - Setup -
     
@@ -33,8 +46,7 @@ final class SampleViewController: UIViewController {
         
         super.viewDidAppear(animated)
         
-        createNeedleCompass()
-        createCircleCompass()
+        createCompasses()
         startHeadings()
     }
 }
@@ -46,28 +58,22 @@ extension SampleViewController {
     ///
     /// Creates a needle compass.
     ///
-    private func createNeedleCompass() {
+    private func createCompasses() {
         
-        let compassView = NeedleCompassView(frame: needleCompassContainer.bounds)
-        needleCompassContainer.addSubview(compassView)
-        self.needleCompassView = compassView
-    }
-    
-    ///
-    /// Creates a circular compass.
-    ///
-    private func createCircleCompass() {
+        let compassViews = [arrowCompassView, circularCompassView]
+        let containers: [UIView] = [arrowCompassContainer, circularCompassContainer]
         
-        let compassView = CircularCompassView(frame: circleCompassContainer.bounds)
-        compassView.borderColor = .black
-        compassView.fillColor = .black
-        compassView.tickColor = .yellow
-        compassView.primaryTextColor = .white
-        compassView.secondaryTextColor = .white
-        compassView.needleColor = .white
-        
-        circleCompassContainer.addSubview(compassView)
-        self.circleCompassView = compassView
+        for (index, container) in containers.enumerated() {
+            
+            let compassView = compassViews[index]
+            container.addSubview(compassView)
+            compassView.translatesAutoresizingMaskIntoConstraints = false
+            
+            container.addConstraint(NSLayoutConstraint(item: compassView, attribute: .top, relatedBy: .equal, toItem: container, attribute: .top, multiplier: 1.0, constant: 0))
+            container.addConstraint(NSLayoutConstraint(item: compassView, attribute: .right, relatedBy: .equal, toItem: container, attribute: .right, multiplier: 1.0, constant: 0))
+            container.addConstraint(NSLayoutConstraint(item: compassView, attribute: .bottom, relatedBy: .equal, toItem: container, attribute: .bottom, multiplier: 1.0, constant: 0))
+            container.addConstraint(NSLayoutConstraint(item: compassView, attribute: .left, relatedBy: .equal, toItem: container, attribute: .left, multiplier: 1.0, constant: 0))
+        }
     }
 }
 
@@ -75,13 +81,16 @@ extension SampleViewController {
 
 extension SampleViewController {
     
+    ///
+    /// Starts randomizes compass headings to show animation.
+    ///
     func startHeadings() {
         
         _ = Timer.scheduledTimer(withTimeInterval: 3.0, repeats: true, block: { _ in
             
             let randomDegrees = Double.random(in: 0...360)
-            self.needleCompassView.setHeading(degrees: randomDegrees, animated: true)
-            self.circleCompassView.setHeading(degrees: randomDegrees, animated: true)
+            self.arrowCompassView.setHeading(degrees: randomDegrees, animated: true)
+            self.circularCompassView.setHeading(degrees: randomDegrees, animated: true)
         })
     }
 }

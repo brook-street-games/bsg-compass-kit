@@ -21,23 +21,13 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
     // MARK: - Conformance Properties -
     
     private(set) public var speed: Double = 0.0
-    public var measurementSystem: MeasurementSystem = .imperial { didSet { update() }}
-    public var maxSpeed: Double = 120.0 { didSet { update() }}
+    public var measurementSystem: MeasurementSystem = .imperial { didSet { setNeedsDisplay() }}
+    public var maxSpeed: Double = 120.0 { didSet { setNeedsDisplay() }}
     
     // MARK: - Properties -
     
     /// The type of needle used to indicate speed.
-    public var needleType: NeedleType = .bar { didSet { update() }}
-    
-    // MARK: - Initializers -
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    public var needleType: NeedleType = .bar { didSet { setNeedsDisplay() }}
     
     // MARK: - Setup -
     
@@ -76,10 +66,6 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
         needleShapeLayer.strokeEnd = 0
         needleShapeLayer.zPosition = 2
         layer.addSublayer(needleShapeLayer)
-    }
-    
-    override func update() {
-        setSpeed(speed, animated: false)
     }
 }
 

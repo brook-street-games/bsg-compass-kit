@@ -1,5 +1,5 @@
 //
-//  NeedleCompassView.swift
+//  ArrowCompassView.swift
 //
 //  Created by JechtSh0t on 4/3/22.
 //  Copyright © 2022 Brook Street Games LLC. All rights reserved.
@@ -9,14 +9,13 @@ import UIKit
 import CoreLocation
 
 ///
-/// A needle shaped implementation of *Compass*.
+/// An arrow shaped implementation of *Compass*.
 ///
-public final class NeedleCompassView: UIView, Compass {
+public final class ArrowCompassView: GaugeView, Compass {
     
     // MARK: - Conformance Properties -
     
     private(set) public var degrees: Double = 0.0
-    public var customFontName: String?
     
     // MARK: - Properties -
     
@@ -32,7 +31,7 @@ public final class NeedleCompassView: UIView, Compass {
         let label = UILabel()
         label.textAlignment = .center
         label.textColor = textColor
-        label.font = getFont(size: bounds.width * 0.20)
+        label.font = getFont(size: bounds.width * 0.18)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -47,11 +46,7 @@ public final class NeedleCompassView: UIView, Compass {
     
     // MARK: - Setup -
     
-    public override func didMoveToSuperview() {
-        setup()
-    }
-    
-    func setup() {
+    override func setup() {
         
         addSubview(needleImageView)
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
@@ -71,7 +66,7 @@ public final class NeedleCompassView: UIView, Compass {
 
 // MARK: - Update -
 
-extension NeedleCompassView {
+extension ArrowCompassView {
     
     public func update() {
         setHeading(degrees: degrees, animated: false)
@@ -80,7 +75,7 @@ extension NeedleCompassView {
 
 // MARK: - Heading -
 
-extension NeedleCompassView {
+extension ArrowCompassView {
     
     ///
     /// Updates compass to display new information.
