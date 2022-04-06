@@ -12,6 +12,9 @@ import CoreLocation
 ///
 public protocol Compass: Gauge {
     
+    /// The current degree value.
+    var degrees: Double { get }
+    
     ///
     /// Sets the heading to a new value.
     ///

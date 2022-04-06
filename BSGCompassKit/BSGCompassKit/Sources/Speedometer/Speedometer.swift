@@ -10,10 +10,12 @@
 ///
 public protocol Speedometer: Gauge {
     
-    /// Controls the range of speeds a speedometer can display.
-    var maxSpeed: Double { get set }
     /// The unit of measurement used for speed.
     var measurementSystem: MeasurementSystem { get set }
+    /// The current speed.
+    var speed: Double { get }
+    /// Controls the range of speeds a speedometer can display. This value be take the form of mi/hr or km/hr based on *measurementSystem*.
+    var maxSpeed: Double { get set }
     
     ///
     /// Sets the speed to a new value.

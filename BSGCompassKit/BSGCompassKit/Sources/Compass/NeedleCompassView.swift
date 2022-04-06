@@ -13,12 +13,15 @@ import CoreLocation
 ///
 public final class NeedleCompassView: UIView, Compass {
     
+    // MARK: - Conformance Properties -
+    
+    private(set) public var degrees: Double = 0.0
+    public var customFontName: String?
+    
     // MARK: - Properties -
     
     /// The color of the compass needle.
     public var needleColor: UIColor = .label
-    /// The name of a custom font to use.
-    public var customFontName: String?
     /// The text color.
     public var textColor: UIColor = .systemBackground
     
@@ -66,6 +69,15 @@ public final class NeedleCompassView: UIView, Compass {
     }
 }
 
+// MARK: - Update -
+
+extension NeedleCompassView {
+    
+    public func update() {
+        setHeading(degrees: degrees, animated: false)
+    }
+}
+
 // MARK: - Heading -
 
 extension NeedleCompassView {
@@ -80,6 +92,7 @@ extension NeedleCompassView {
     public func setHeading(degrees: Double, animated: Bool) {
         
         guard let direction = Direction(degrees: degrees) else { return }
+        self.degrees = direction.degrees
         
         label.text = direction.symbol
         let radians = GaugeMath.getRadians(fromDegrees: degrees)

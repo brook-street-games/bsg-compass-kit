@@ -13,6 +13,10 @@ import CoreLocation
 ///
 public final class CircularCompassView: CircularGaugeView, Compass {
     
+    // MARK: - Properties -
+    
+    private(set) public var degrees: Double = 0.0
+    
     // MARK: - Initializers -
     
     public override init(frame: CGRect) {
@@ -63,6 +67,10 @@ public final class CircularCompassView: CircularGaugeView, Compass {
         needleShapeLayer.strokeEnd = 0
         needleShapeLayer.zPosition = 1
         layer.addSublayer(needleShapeLayer)
+    }
+    
+    override func update() {
+        setHeading(degrees: degrees, animated: false)
     }
 }
 

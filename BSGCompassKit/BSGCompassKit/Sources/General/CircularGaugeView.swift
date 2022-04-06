@@ -12,6 +12,10 @@ import UIKit
 ///
 public class CircularGaugeView: UIView, Gauge {
     
+    // MARK: - Conformance Properties -
+    
+    public var customFontName: String?
+    
     // MARK: - Properties -
     
     /// The color of the circle border.
@@ -20,8 +24,6 @@ public class CircularGaugeView: UIView, Gauge {
     public var borderWidth: CGFloat = 5.0
     /// The color of the background area within the circle.
     public var fillColor: UIColor = .systemBackground
-    /// The name of a custom font to use.
-    public var customFontName: String?
     /// The color of the primary label.
     public var primaryTextColor: UIColor = .label
     /// The color of the secondary label.
@@ -116,4 +118,5 @@ public class CircularGaugeView: UIView, Gauge {
     
     func createTicks(color: UIColor) {}
     func createNeedle(color: UIColor) {}
+    func update() {}
 }

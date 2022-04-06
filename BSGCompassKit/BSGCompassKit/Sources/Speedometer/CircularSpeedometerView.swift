@@ -18,12 +18,16 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
         case marker, bar
     }
     
+    // MARK: - Conformance Properties -
+    
+    private(set) public var speed: Double = 0.0
+    public var measurementSystem: MeasurementSystem = .imperial { didSet { update() }}
+    public var maxSpeed: Double = 120.0 { didSet { update() }}
+    
     // MARK: - Properties -
     
-    public var maxSpeed: Double = 120.0
-    public var measurementSystem: MeasurementSystem = .metric
     /// The type of needle used to indicate speed.
-    public var needleType: NeedleType = .bar
+    public var needleType: NeedleType = .bar { didSet { update() }}
     
     // MARK: - Initializers -
     
@@ -73,6 +77,10 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
         needleShapeLayer.zPosition = 2
         layer.addSublayer(needleShapeLayer)
     }
+    
+    override func update() {
+        setSpeed(speed, animated: false)
+    }
 }
 
 // MARK: - Speed -
@@ -82,6 +90,7 @@ extension CircularSpeedometerView {
     public func setSpeed(_ speed: Double, animated: Bool) {
         
         let confinedSpeed = speed.confine(to: 0...maxSpeed)
+        self.speed = confinedSpeed
         
         primaryLabel.text = getString(from: confinedSpeed)
         secondaryLabel.text = measurementSystem.unitOfSpeed
