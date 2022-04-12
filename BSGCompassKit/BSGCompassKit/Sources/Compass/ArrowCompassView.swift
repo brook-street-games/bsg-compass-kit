@@ -62,7 +62,7 @@ public final class ArrowCompassView: GaugeView, Compass {
         addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.8, constant: 0))
         addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0))
         
-        reset(animated: false)
+        setHeading(degrees: degrees, animated: false)
     }
 }
 
