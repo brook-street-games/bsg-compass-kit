@@ -62,6 +62,25 @@ public enum GaugeMath {
     }
 }
 
+// MARK: - Distance -
+
+extension GaugeMath {
+    
+    ///
+    /// Gets the distance between coordinates.
+    ///
+    /// - parameter origin: Coordinates of the current location.
+    /// - parameter destination: Coordinates of a destination location.
+    /// - returns: The distance in meters.
+    ///
+    public static func getDistance(from origin: CLLocationCoordinate2D, to destination: CLLocationCoordinate2D) -> CGFloat {
+        
+        let originLocation = CLLocation(latitude: origin.latitude, longitude: origin.longitude)
+        let destinationLocation = CLLocation(latitude: destination.latitude, longitude: destination.longitude)
+        return originLocation.distance(from: destinationLocation)
+    }
+}
+
 // MARK - Circle -
 
 extension GaugeMath {

@@ -16,6 +16,8 @@ public final class CircularCompassView: CircularGaugeView, Compass {
     // MARK: - Properties -
     
     private(set) public var degrees: Double = 0.0
+    public var destination: CLLocationCoordinate2D?
+    public var origin: CLLocationCoordinate2D?
     
     // MARK: - Setup -
     

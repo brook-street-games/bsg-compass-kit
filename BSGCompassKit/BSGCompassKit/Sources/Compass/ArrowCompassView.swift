@@ -16,9 +16,13 @@ public final class ArrowCompassView: GaugeView, Compass {
     // MARK: - Conformance Properties -
     
     private(set) public var degrees: Double = 0.0
+    public var destination: CLLocationCoordinate2D?
+    public var origin: CLLocationCoordinate2D?
     
     // MARK: - Properties -
     
+    /// The type of label to display.
+    public var labelType: LabelType = .direction
     /// The color of the compass needle.
     public var needleColor: UIColor = .label
     /// The text color.
@@ -66,12 +70,13 @@ public final class ArrowCompassView: GaugeView, Compass {
     }
 }
 
-// MARK: - Update -
+// MARK: - Label Type -
 
 extension ArrowCompassView {
     
-    public func update() {
-        setHeading(degrees: degrees, animated: false)
+    public enum LabelType {
+        case direction
+        case distance
     }
 }
 
@@ -91,7 +96,17 @@ extension ArrowCompassView {
         guard let direction = Direction(degrees: degrees) else { return }
         self.degrees = direction.degrees
         
-        label.text = direction.symbol
+        switch labelType {
+        case .direction: label.text = direction.symbol
+        case .distance:
+            guard let origin = origin, let destination = destination else { return }
+            let distanceInMeters = GaugeMath.getDistance(from: origin, to: destination)
+            switch measurementSystem {
+            case .metric: label.text = String(format: "%.1f km", distanceInMeters / 1000)
+            case .imperial: label.text = String(format: "%.1f mi", distanceInMeters / 1609.34)
+            }
+        }
+       
         let radians = GaugeMath.getRadians(fromDegrees: degrees)
         
         if animated {
@@ -101,5 +116,14 @@ extension ArrowCompassView {
         } else {
             needleImageView.transform = CGAffineTransform(rotationAngle: CGFloat(radians))
         }
+    }
+    
+    public func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool) {
+        
+        self.destination = destination
+        self.origin = origin
+        
+        let degrees = GaugeMath.getDegrees(to: destination, from: origin)
+        setHeading(degrees: degrees, animated: animated)
     }
 }

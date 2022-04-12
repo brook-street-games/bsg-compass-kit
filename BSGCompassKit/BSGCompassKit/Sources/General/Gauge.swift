@@ -11,6 +11,9 @@ import UIKit
 /// Set of base functionality for all gauges.
 ///
 public protocol Gauge {
+    
+    /// The unit of measurement used for speed.
+    var measurementSystem: MeasurementSystem { get set }
     /// The name of a custom font to use.
     var customFontName: String? { get set }
     /// The time it takes for gauge animations to complete.

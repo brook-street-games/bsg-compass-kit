@@ -21,8 +21,7 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
     // MARK: - Conformance Properties -
     
     private(set) public var speed: Double = 0.0
-    public var measurementSystem: MeasurementSystem = .imperial { didSet { setNeedsDisplay() }}
-    public var maxSpeed: Double = 120.0 { didSet { setNeedsDisplay() }}
+    public var maxSpeed: Double = 120.0
     
     // MARK: - Properties -
     
