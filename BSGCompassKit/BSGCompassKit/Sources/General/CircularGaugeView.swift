@@ -61,6 +61,8 @@ public class CircularGaugeView: GaugeView {
     
     override func setup() {
         
+        super.setup()
+        
         createBorder()
         createLabels()
         createTicks(color: tickColor)

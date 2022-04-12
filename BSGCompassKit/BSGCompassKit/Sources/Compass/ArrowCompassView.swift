@@ -48,6 +48,8 @@ public final class ArrowCompassView: GaugeView, Compass {
     
     override func setup() {
         
+        super.setup()
+        
         addSubview(needleImageView)
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
