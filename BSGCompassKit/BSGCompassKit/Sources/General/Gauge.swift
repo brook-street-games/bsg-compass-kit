@@ -18,7 +18,7 @@ public protocol Gauge {
 extension Gauge {
     
     /// The time it takes for gauge animations to complete.
-    var animationDuration: TimeInterval { 2.0 }
+    public var animationDuration: TimeInterval { 1.0 }
     
     ///
     /// Gets the correct font for a specified size.
