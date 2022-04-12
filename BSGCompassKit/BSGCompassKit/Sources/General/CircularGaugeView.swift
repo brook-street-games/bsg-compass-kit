@@ -35,8 +35,7 @@ public class CircularGaugeView: GaugeView {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFont(size: bounds.width * 0.24)
-        label.textColor = primaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -44,8 +43,7 @@ public class CircularGaugeView: GaugeView {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = getFont(size: bounds.width * 0.12)
-        label.textColor = secondaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -94,7 +92,12 @@ public class CircularGaugeView: GaugeView {
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
         
+        primaryLabel.font = getFont(size: bounds.width * 0.24)
+        primaryLabel.textColor = primaryTextColor
         stackView.addArrangedSubview(primaryLabel)
+        
+        secondaryLabel.font = getFont(size: bounds.width * 0.12)
+        secondaryLabel.textColor = secondaryTextColor
         stackView.addArrangedSubview(secondaryLabel)
         
         addSubview(stackView)
