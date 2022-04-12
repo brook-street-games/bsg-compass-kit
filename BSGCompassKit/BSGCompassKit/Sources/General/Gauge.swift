@@ -13,12 +13,11 @@ import UIKit
 public protocol Gauge {
     /// The name of a custom font to use.
     var customFontName: String? { get set }
+    /// The time it takes for gauge animations to complete.
+    var animationDuration: TimeInterval { get set }
 }
 
 extension Gauge {
-    
-    /// The time it takes for gauge animations to complete.
-    public var animationDuration: TimeInterval { 1.0 }
     
     ///
     /// Gets the correct font for a specified size.

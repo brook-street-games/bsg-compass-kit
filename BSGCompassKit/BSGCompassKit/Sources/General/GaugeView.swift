@@ -15,6 +15,7 @@ public class GaugeView: UIView, Gauge {
     // MARK: - Conformance Properties -
     
     public var customFontName: String?
+    public var animationDuration: TimeInterval = 1.0
     
     // MARK: - Setup -
     
