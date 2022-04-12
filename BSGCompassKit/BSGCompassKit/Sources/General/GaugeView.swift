@@ -19,13 +19,21 @@ public class GaugeView: UIView, Gauge {
     
     // MARK: - Setup -
     
-    override public func draw(_ rect: CGRect) {
-    
-        for view in subviews { view.removeFromSuperview() }
-        for sublayer in layer.sublayers ?? [] { sublayer.removeFromSuperlayer() }
+    override public func didMoveToSuperview() {
         
+        super.didMoveToSuperview()
         setup()
     }
     
-    func setup() {}
+    override public func draw(_ rect: CGRect) {
+    
+        super.draw(rect)
+        setup()
+    }
+    
+    func setup() {
+        
+        for view in subviews { view.removeFromSuperview() }
+        for sublayer in layer.sublayers ?? [] { sublayer.removeFromSuperlayer() }
+    }
 }
