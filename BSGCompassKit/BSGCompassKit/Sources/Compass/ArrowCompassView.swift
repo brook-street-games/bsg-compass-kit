@@ -21,12 +21,10 @@ public final class ArrowCompassView: GaugeView, Compass {
     
     // MARK: - Properties -
     
-    /// The type of label to display.
-    public var labelType: LabelType = .direction
     /// The color of the compass needle.
-    public var needleColor: UIColor = .label
+    public var needleColor: UIColor = .label { didSet { needleImageView.tintColor = needleColor }}
     /// The text color.
-    public var textColor: UIColor = .systemBackground
+    public var textColor: UIColor = .systemBackground { didSet { label.textColor = textColor }}
     
     // MARK: - UI -
     
@@ -41,7 +39,6 @@ public final class ArrowCompassView: GaugeView, Compass {
     private lazy var needleImageView: UIImageView = {
         
         let imageView = UIImageView(image: UIImage(systemName: "location.north.fill"))
-        imageView.tintColor = needleColor
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -52,6 +49,7 @@ public final class ArrowCompassView: GaugeView, Compass {
         
         super.setup()
         
+        needleImageView.tintColor = needleColor
         addSubview(needleImageView)
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
@@ -70,16 +68,6 @@ public final class ArrowCompassView: GaugeView, Compass {
     }
 }
 
-// MARK: - Label Type -
-
-extension ArrowCompassView {
-    
-    public enum LabelType {
-        case direction
-        case distance
-    }
-}
-
 // MARK: - Heading -
 
 extension ArrowCompassView {
@@ -95,17 +83,7 @@ extension ArrowCompassView {
         
         guard let direction = Direction(degrees: degrees) else { return }
         self.degrees = direction.degrees
-        
-        switch labelType {
-        case .direction: label.text = direction.symbol
-        case .distance:
-            guard let origin = origin, let destination = destination else { return }
-            let distanceInMeters = GaugeMath.getDistance(from: origin, to: destination)
-            switch measurementSystem {
-            case .metric: label.text = String(format: "%.1f km", distanceInMeters / 1000)
-            case .imperial: label.text = String(format: "%.1f mi", distanceInMeters / 1609.34)
-            }
-        }
+        label.text = direction.symbol
        
         let radians = GaugeMath.getRadians(fromDegrees: degrees)
         
