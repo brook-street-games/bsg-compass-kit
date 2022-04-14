@@ -59,7 +59,7 @@ public final class ArrowCompassView: GaugeView, Compass {
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0))
         
         label.textColor = textColor
-        label.font = getFont(size: bounds.width * 0.18)
+        label.font = getFont(size: bounds.width * 0.20)
         addSubview(label)
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
