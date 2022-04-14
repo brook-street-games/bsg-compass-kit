@@ -117,13 +117,4 @@ extension ArrowCompassView {
             needleImageView.transform = CGAffineTransform(rotationAngle: CGFloat(radians))
         }
     }
-    
-    public func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool) {
-        
-        self.destination = destination
-        self.origin = origin
-        
-        let degrees = GaugeMath.getDegrees(to: destination, from: origin)
-        setHeading(degrees: degrees, animated: animated)
-    }
 }
