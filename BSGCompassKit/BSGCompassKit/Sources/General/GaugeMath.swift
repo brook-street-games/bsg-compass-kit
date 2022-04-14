@@ -32,6 +32,11 @@ public enum GaugeMath {
     public static func getDegrees(fromRadians radians: Double) -> Double {
         return radians / (.pi / 180)
     }
+}
+
+// MARK: - Heading -
+
+extension GaugeMath {
     
     ///
     /// Get the angle between two coordinates in degrees.
@@ -59,6 +64,19 @@ public enum GaugeMath {
         
         let degrees = getDegrees(to: destination, from: origin)
         return getRadians(fromDegrees: degrees)
+    }
+    
+    ///
+    /// Get the direction of a destination form the origin.
+    ///
+    /// - parameter destination: The destination coordinate.
+    /// - parameter origin: The origin coordinate.
+    /// - parameter returns: The direction.
+    ///
+    public static func getDirection(to destination: CLLocationCoordinate2D, from origin: CLLocationCoordinate2D) -> Direction? {
+        
+        let degrees = getDegrees(to: destination, from: origin)
+        return Direction(degrees: degrees)
     }
 }
 
