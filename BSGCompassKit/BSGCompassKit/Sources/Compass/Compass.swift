@@ -95,6 +95,10 @@ extension Compass {
         setHeading(degrees: destinationAngle, animated: animated)
     }
     
+    func updateHeading(animated: Bool) {
+        setHeading(degrees: degrees, animated: animated)
+    }
+    
     public func reset(animated: Bool) {
         setHeading(direction: .north, animated: animated)
     }

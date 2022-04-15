@@ -25,7 +25,7 @@ public final class CircularCompassView: CircularGaugeView, Compass {
     override func setup() {
         
         super.setup()
-        setHeading(degrees: degrees, animated: false)
+        updateHeading(animated: false)
     }
     
     override func createTicks(color: UIColor) {

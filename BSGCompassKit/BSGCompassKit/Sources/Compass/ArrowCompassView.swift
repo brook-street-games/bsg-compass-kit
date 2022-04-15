@@ -26,6 +26,8 @@ public final class ArrowCompassView: GaugeView, Compass {
     public var needleColor: UIColor = .label { didSet { needleImageView.tintColor = needleColor }}
     /// The text color.
     public var textColor: UIColor = .systemBackground { didSet { label.textColor = textColor }}
+    /// The style of labels to display. Defaults to *.direction*.
+    public var labelStyle: LabelStyle = .direction { didSet { updateHeading(animated: false) }}
     
     // MARK: - UI -
     
@@ -65,7 +67,19 @@ public final class ArrowCompassView: GaugeView, Compass {
         addConstraint(NSLayoutConstraint(item: label, attribute: .width, relatedBy: .equal, toItem: self, attribute: .width, multiplier: 0.8, constant: 0))
         addConstraint(NSLayoutConstraint(item: label, attribute: .height, relatedBy: .equal, toItem: self, attribute: .height, multiplier: 0.8, constant: 0))
         
-        setHeading(degrees: degrees, animated: false)
+        updateHeading(animated: false)
+    }
+}
+
+// MARK: - Label -
+
+extension ArrowCompassView {
+    
+    public enum LabelStyle {
+        /// The compass will not display a label.
+        case none
+        /// The compass will display the direction it is pointing.
+        case direction
     }
 }
 
@@ -83,7 +97,11 @@ extension ArrowCompassView {
         
         guard let direction = Direction(degrees: degrees) else { return }
         self.degrees = degrees
-        label.text = direction.symbol
+        
+        switch labelStyle {
+        case .none: label.text = nil
+        case .direction: label.text = direction.symbol
+        }
        
         let radians = GaugeMath.getRadians(fromDegrees: degrees)
         
