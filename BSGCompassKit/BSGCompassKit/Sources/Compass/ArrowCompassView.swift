@@ -16,6 +16,7 @@ public final class ArrowCompassView: GaugeView, Compass {
     // MARK: - Conformance Properties -
     
     private(set) public var degrees: Double = 0.0
+    public var direction: Direction { Direction(degrees: degrees)! }
     public var destination: CLLocationCoordinate2D?
     public var origin: CLLocationCoordinate2D?
     
@@ -74,7 +75,6 @@ extension ArrowCompassView {
     
     ///
     /// Updates compass to display new information.
-    /// - note: This will not show indicator for due north (359...1 degress) due to limits of circle. Left because behavior is favorable.
     ///
     /// - parameter degress: The degree value of the current heading (0-360).
     /// - parameter animated: If true, the view will animate into position.
@@ -82,7 +82,7 @@ extension ArrowCompassView {
     public func setHeading(degrees: Double, animated: Bool) {
         
         guard let direction = Direction(degrees: degrees) else { return }
-        self.degrees = direction.degrees
+        self.degrees = degrees
         label.text = direction.symbol
        
         let radians = GaugeMath.getRadians(fromDegrees: degrees)

@@ -14,6 +14,8 @@ public protocol Compass: Gauge {
     
     /// The current degree value.
     var degrees: Double { get }
+    /// The current direction value.
+    var direction: Direction { get }
     /// The coordinates of the compass destination.
     var destination: CLLocationCoordinate2D? { get set }
     /// The coordinates of the compass user.

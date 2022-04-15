@@ -16,6 +16,7 @@ public final class CircularCompassView: CircularGaugeView, Compass {
     // MARK: - Properties -
     
     private(set) public var degrees: Double = 0.0
+    public var direction: Direction { Direction(degrees: degrees)! }
     public var destination: CLLocationCoordinate2D?
     public var origin: CLLocationCoordinate2D?
     
@@ -76,6 +77,7 @@ extension CircularCompassView {
     public func setHeading(degrees: Double, animated: Bool) {
         
         guard let direction = Direction(degrees: degrees) else { return }
+        self.degrees = degrees
         
         primaryLabel.text = direction.symbol
         secondaryLabel.text = getString(from: degrees)
