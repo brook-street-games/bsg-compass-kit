@@ -92,11 +92,11 @@ public class CircularGaugeView: GaugeView {
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
         
-        primaryLabel.font = getFont(size: bounds.width * 0.24)
+        primaryLabel.font = getFont(size: bounds.width * 0.28)
         primaryLabel.textColor = primaryTextColor
         stackView.addArrangedSubview(primaryLabel)
         
-        secondaryLabel.font = getFont(size: bounds.width * 0.12)
+        secondaryLabel.font = getFont(size: bounds.width * 0.14)
         secondaryLabel.textColor = secondaryTextColor
         stackView.addArrangedSubview(secondaryLabel)
         
