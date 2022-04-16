@@ -22,6 +22,8 @@ public final class ArrowCompassView: GaugeView, Compass {
     
     // MARK: - Properties -
     
+    /// If true, the compass will form an arrow to point towards the current heading.
+    public var pointToHeading = true { didSet { setup() }}
     /// The color of the compass needle.
     public var needleColor: UIColor = .label { didSet { needleImageView.tintColor = needleColor }}
     /// The text color.
@@ -41,7 +43,7 @@ public final class ArrowCompassView: GaugeView, Compass {
     
     private lazy var needleImageView: UIImageView = {
         
-        let imageView = UIImageView(image: UIImage(systemName: "location.north.fill"))
+        let imageView = UIImageView()
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -52,6 +54,7 @@ public final class ArrowCompassView: GaugeView, Compass {
         
         super.setup()
         
+        needleImageView.image = pointToHeading ? UIImage(systemName: "location.north.fill") : UIImage(systemName: "circle.fill")
         needleImageView.tintColor = needleColor
         addSubview(needleImageView)
         addConstraint(NSLayoutConstraint(item: needleImageView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
