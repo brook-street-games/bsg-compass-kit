@@ -7,8 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A277EA2280DB79C000F447B /* CircularCompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A277EA1280DB79C000F447B /* CircularCompassTests.swift */; };
+		4A277EA4280DB7DF000F447B /* City.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A277EA3280DB7DF000F447B /* City.swift */; };
 		4A54BA5727FCD2B800A6D04C /* FloatingPoint+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A54BA5627FCD2B800A6D04C /* FloatingPoint+Extensions.swift */; };
-		4A627E3927FCE3C5005DC8ED /* CompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A627E3627FCE3C5005DC8ED /* CompassTests.swift */; };
+		4A627E3927FCE3C5005DC8ED /* ArrowCompassTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A627E3627FCE3C5005DC8ED /* ArrowCompassTests.swift */; };
 		4A627E3C27FCE466005DC8ED /* DirectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A627E3B27FCE466005DC8ED /* DirectionTests.swift */; };
 		4A627E3E27FCE769005DC8ED /* SpeedometerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A627E3D27FCE769005DC8ED /* SpeedometerTests.swift */; };
 		4A627E4027FCE866005DC8ED /* GaugeMathTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A627E3F27FCE866005DC8ED /* GaugeMathTests.swift */; };
@@ -37,8 +39,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4A277EA1280DB79C000F447B /* CircularCompassTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CircularCompassTests.swift; sourceTree = "<group>"; };
+		4A277EA3280DB7DF000F447B /* City.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City.swift; sourceTree = "<group>"; };
 		4A54BA5627FCD2B800A6D04C /* FloatingPoint+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FloatingPoint+Extensions.swift"; sourceTree = "<group>"; };
-		4A627E3627FCE3C5005DC8ED /* CompassTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompassTests.swift; sourceTree = "<group>"; };
+		4A627E3627FCE3C5005DC8ED /* ArrowCompassTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArrowCompassTests.swift; sourceTree = "<group>"; };
 		4A627E3827FCE3C5005DC8ED /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4A627E3B27FCE466005DC8ED /* DirectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionTests.swift; sourceTree = "<group>"; };
 		4A627E3D27FCE769005DC8ED /* SpeedometerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpeedometerTests.swift; sourceTree = "<group>"; };
@@ -78,13 +82,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4A627E3527FCE3C5005DC8ED /* Sources */ = {
+		4A277EA5280DB88B000F447B /* Tests */ = {
 			isa = PBXGroup;
 			children = (
-				4A627E3627FCE3C5005DC8ED /* CompassTests.swift */,
+				4A627E3627FCE3C5005DC8ED /* ArrowCompassTests.swift */,
 				4A627E3B27FCE466005DC8ED /* DirectionTests.swift */,
 				4A627E3D27FCE769005DC8ED /* SpeedometerTests.swift */,
 				4A627E3F27FCE866005DC8ED /* GaugeMathTests.swift */,
+				4A277EA1280DB79C000F447B /* CircularCompassTests.swift */,
+			);
+			path = Tests;
+			sourceTree = "<group>";
+		};
+		4A277EA6280DB899000F447B /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				4A277EA3280DB7DF000F447B /* City.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		4A627E3527FCE3C5005DC8ED /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				4A277EA6280DB899000F447B /* Helpers */,
+				4A277EA5280DB88B000F447B /* Tests */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -315,7 +337,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4A627E3927FCE3C5005DC8ED /* CompassTests.swift in Sources */,
+				4A627E3927FCE3C5005DC8ED /* ArrowCompassTests.swift in Sources */,
+				4A277EA2280DB79C000F447B /* CircularCompassTests.swift in Sources */,
+				4A277EA4280DB7DF000F447B /* City.swift in Sources */,
 				4A627E4027FCE866005DC8ED /* GaugeMathTests.swift in Sources */,
 				4A627E3E27FCE769005DC8ED /* SpeedometerTests.swift in Sources */,
 				4A627E3C27FCE466005DC8ED /* DirectionTests.swift in Sources */,
