@@ -12,14 +12,10 @@ import CoreLocation
 ///
 public protocol Compass: Gauge {
     
-    /// The current degree value.
+    /// The relative degree value of the compass needle.
     var degrees: Double { get }
-    /// The current direction value.
+    /// The relative direction that the compass needle is pointing.
     var direction: Direction { get }
-    /// The coordinates of the compass destination.
-    var destination: CLLocationCoordinate2D? { get set }
-    /// The coordinates of the compass user.
-    var origin: CLLocationCoordinate2D? { get set }
     
     ///
     /// Sets the heading to a new value.
@@ -47,16 +43,6 @@ public protocol Compass: Gauge {
     mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool)
     
     ///
-    /// Sets the heading to a new value. This method uses *course* to take into account the direction the user is moving.
-    ///
-    /// - parameter destination: Coordinates of a destination location.
-    /// - parameter origin: Coordinates of the current location.
-    /// - parameter course: The degree value of the current direction.
-    /// - parameter animated: If true, the compass will animate into position.
-    ///
-    mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, course: Double, animated: Bool)
-    
-    ///
     /// Resets the heading to due north.
     ///
     /// - parameter animated: If true, the compass will animate into position.
@@ -78,21 +64,8 @@ extension Compass {
     
     public mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool) {
         
-        self.destination = destination
-        self.origin = origin
-        
         let destinationDegrees = GaugeMath.getDegrees(to: destination, from: origin)
         setHeading(degrees: destinationDegrees, animated: animated)
-    }
-    
-    public mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, course: Double, animated: Bool) {
-        
-        self.destination = destination
-        self.origin = origin
-        
-        let destinationDegrees = GaugeMath.getDegrees(to: destination, from: origin)
-        guard let destinationAngle = destinationDegrees.decrement(by: course, range: 0...360) else { return }
-        setHeading(degrees: destinationAngle, animated: animated)
     }
     
     func updateHeading(animated: Bool) {

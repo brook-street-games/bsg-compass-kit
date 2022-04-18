@@ -13,12 +13,10 @@ import CoreLocation
 ///
 public final class CircularCompassView: CircularGaugeView, Compass {
     
-    // MARK: - Properties -
+    // MARK: - Compass Properties -
     
     private(set) public var degrees: Double = 0.0
     public var direction: Direction { Direction(degrees: degrees)! }
-    public var destination: CLLocationCoordinate2D?
-    public var origin: CLLocationCoordinate2D?
     
     // MARK: - Setup -
     
