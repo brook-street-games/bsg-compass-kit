@@ -14,26 +14,6 @@ public protocol Gauge {
     
     /// The unit of measurement used for speed.
     var measurementSystem: MeasurementSystem { get set }
-    /// The name of a custom font to use.
-    var customFontName: String? { get set }
     /// The time it takes for gauge animations to complete.
     var animationDuration: TimeInterval { get set }
-}
-
-extension Gauge {
-    
-    ///
-    /// Gets the correct font for a specified size.
-    ///
-    /// - parameter size: The size of the font.
-    /// - returns: A font object.
-    ///
-    func getFont(size: Double) -> UIFont {
-        
-        if let customFontName = customFontName {
-            return UIFont(name: customFontName, size: size) ?? .systemFont(ofSize: size)
-        } else {
-            return .systemFont(ofSize: size)
-        }
-    }
 }

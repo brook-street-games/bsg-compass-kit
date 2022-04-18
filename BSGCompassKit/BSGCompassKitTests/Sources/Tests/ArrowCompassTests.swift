@@ -82,7 +82,7 @@ extension ArrowCompassTests {
     
     func testDestinationHeadingWithCourse() {
         
-        var compass = ArrowCompassView()
+        let compass = ArrowCompassView()
         
         compass.setHeading(destination: City.miami, origin: City.newYork, course: 0, animated: false)
         XCTAssertEqual(compass.direction, .south)

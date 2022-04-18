@@ -22,6 +22,10 @@ public class CircularGaugeView: GaugeView {
     public var fillColor: UIColor = .systemBackground
     /// The color of the primary label.
     public var primaryTextColor: UIColor = .label
+    /// A custom font for the primary label.
+    public var primaryFont: UIFont?
+    /// A custom font for the secondary label.
+    public var secondaryFont: UIFont?
     /// The color of the secondary label.
     public var secondaryTextColor: UIColor = .label
     /// The color of the indicator tick marks.
@@ -92,11 +96,11 @@ public class CircularGaugeView: GaugeView {
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
         
-        primaryLabel.font = getFont(size: bounds.width * 0.28)
+        primaryLabel.font = primaryFont ?? .systemFont(ofSize: bounds.width * 0.28)
         primaryLabel.textColor = primaryTextColor
         stackView.addArrangedSubview(primaryLabel)
         
-        secondaryLabel.font = getFont(size: bounds.width * 0.14)
+        secondaryLabel.font = secondaryFont ?? .systemFont(ofSize: bounds.width * 0.14)
         secondaryLabel.textColor = secondaryTextColor
         stackView.addArrangedSubview(secondaryLabel)
         

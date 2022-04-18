@@ -26,6 +26,8 @@ public final class ArrowCompassView: GaugeView, Compass {
     public var needleColor: UIColor = .label { didSet { needleImageView.tintColor = needleColor }}
     /// The text color.
     public var textColor: UIColor = .systemBackground { didSet { label.textColor = textColor }}
+    /// A custom font for the label.
+    public var labelFont: UIFont?
     /// The style of labels to display. Defaults to *.direction*.
     public var labelStyle: LabelStyle = .direction { didSet { updateHeading(animated: false) }}
     
@@ -113,7 +115,7 @@ extension ArrowCompassView {
     private func setupLabel() {
         
         label.textColor = textColor
-        label.font = getFont(size: bounds.width * 0.22)
+        label.font = labelFont ?? .systemFont(ofSize: bounds.width * 0.22)
         addSubview(label)
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: label, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
