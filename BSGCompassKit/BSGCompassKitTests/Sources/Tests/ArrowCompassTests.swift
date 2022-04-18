@@ -86,14 +86,18 @@ extension ArrowCompassTests {
         
         compass.setHeading(destination: City.miami, origin: City.newYork, course: 0, animated: false)
         XCTAssertEqual(compass.direction, .south)
+        XCTAssertEqual(compass.label.text, Direction.south.symbol)
         
         compass.setHeading(destination: City.miami, origin: City.newYork, course: 180, animated: false)
         XCTAssertEqual(compass.direction, .north)
+        XCTAssertEqual(compass.label.text, Direction.south.symbol)
         
         compass.setHeading(destination: City.sanDiego, origin: City.newYork, course: 0, animated: false)
         XCTAssertEqual(compass.direction, .west)
+        XCTAssertEqual(compass.label.text, Direction.west.symbol)
         
         compass.setHeading(destination: City.sanDiego, origin: City.newYork, course: 180, animated: false)
         XCTAssertEqual(compass.direction, .east)
+        XCTAssertEqual(compass.label.text, Direction.west.symbol)
     }
 }

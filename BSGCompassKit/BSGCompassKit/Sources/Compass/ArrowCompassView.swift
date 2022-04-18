@@ -33,7 +33,7 @@ public final class ArrowCompassView: GaugeView, Compass {
     
     // MARK: - UI -
     
-    private lazy var label: UILabel = {
+    lazy var label: UILabel = {
         
         let label = UILabel()
         label.textAlignment = .center
