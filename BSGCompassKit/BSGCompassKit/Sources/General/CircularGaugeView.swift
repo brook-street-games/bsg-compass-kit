@@ -10,7 +10,7 @@ import UIKit
 ///
 /// Base class for circular gauges.
 ///
-public class CircularGaugeView: UIView, Gauge {
+public class CircularGaugeView: GaugeView {
     
     // MARK: - Properties -
     
@@ -20,12 +20,12 @@ public class CircularGaugeView: UIView, Gauge {
     public var borderWidth: CGFloat = 5.0
     /// The color of the background area within the circle.
     public var fillColor: UIColor = .systemBackground
-    /// The font of the primary label.
-    public var primaryFont: UIFont = .systemFont(ofSize: 36)
     /// The color of the primary label.
     public var primaryTextColor: UIColor = .label
-    /// The font of the secondary label.
-    public var secondaryFont: UIFont = .systemFont(ofSize: 12)
+    /// A custom font for the primary label.
+    public var primaryFont: UIFont?
+    /// A custom font for the secondary label.
+    public var secondaryFont: UIFont?
     /// The color of the secondary label.
     public var secondaryTextColor: UIColor = .label
     /// The color of the indicator tick marks.
@@ -39,8 +39,7 @@ public class CircularGaugeView: UIView, Gauge {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = primaryFont
-        label.textColor = primaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -48,8 +47,7 @@ public class CircularGaugeView: UIView, Gauge {
        
         let label = UILabel()
         label.textAlignment = .center
-        label.font = secondaryFont
-        label.textColor = secondaryTextColor
+        label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -61,23 +59,11 @@ public class CircularGaugeView: UIView, Gauge {
         return layer
     }()
     
-    // MARK: - Initializers -
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
     // MARK: - Setup -
     
-    public override func didMoveToSuperview() {
-        setup()
-    }
-    
-    func setup() {
+    override func setup() {
+        
+        super.setup()
         
         createBorder()
         createLabels()
@@ -110,7 +96,12 @@ public class CircularGaugeView: UIView, Gauge {
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1.0, constant: 0))
         addConstraint(NSLayoutConstraint(item: stackView, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1.0, constant: 0))
         
+        primaryLabel.font = primaryFont ?? .systemFont(ofSize: bounds.width * 0.28)
+        primaryLabel.textColor = primaryTextColor
         stackView.addArrangedSubview(primaryLabel)
+        
+        secondaryLabel.font = secondaryFont ?? .systemFont(ofSize: bounds.width * 0.14)
+        secondaryLabel.textColor = secondaryTextColor
         stackView.addArrangedSubview(secondaryLabel)
         
         addSubview(stackView)

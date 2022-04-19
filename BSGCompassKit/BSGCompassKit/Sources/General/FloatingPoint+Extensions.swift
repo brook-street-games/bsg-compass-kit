@@ -55,4 +55,19 @@ extension FloatingPoint {
             return range.lowerBound
         }
     }
+    
+    ///
+    /// Confines the current value to a range. If the value is lower or higher than the range, this will return the lowest or highest value in the range respectively. IF the current values is already contained in *range* it will be returned with no change.
+    ///
+    /// - parameter range: The range to confine to.
+    /// - returns: The current value confined to *range*.
+    ///
+    public func confine(to range: ClosedRange<Self>) -> Self {
+        
+        switch self {
+        case ...range.lowerBound: return range.lowerBound
+        case range.upperBound...: return range.upperBound
+        default: return self
+        }
+    }
 }

@@ -13,22 +13,17 @@ import CoreLocation
 ///
 public final class CircularCompassView: CircularGaugeView, Compass {
     
-    // MARK: - Initializers -
+    // MARK: - Compass Properties -
     
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    private(set) public var degrees: Double = 0.0
+    public var direction: Direction { Direction(degrees: degrees)! }
     
     // MARK: - Setup -
     
     override func setup() {
         
         super.setup()
-        reset(animated: false)
+        updateHeading(animated: false)
     }
     
     override func createTicks(color: UIColor) {
@@ -80,6 +75,7 @@ extension CircularCompassView {
     public func setHeading(degrees: Double, animated: Bool) {
         
         guard let direction = Direction(degrees: degrees) else { return }
+        self.degrees = degrees
         
         primaryLabel.text = direction.symbol
         secondaryLabel.text = getString(from: degrees)

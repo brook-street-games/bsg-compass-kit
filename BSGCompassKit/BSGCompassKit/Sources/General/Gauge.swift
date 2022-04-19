@@ -5,15 +5,15 @@
 //  Copyright © 2022 Brook Street Games LLC. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 ///
 /// Set of base functionality for all gauges.
 ///
-public protocol Gauge {}
-
-extension Gauge {
+public protocol Gauge {
     
+    /// The unit of measurement used for speed.
+    var measurementSystem: MeasurementSystem { get set }
     /// The time it takes for gauge animations to complete.
-    var animationDuration: TimeInterval { 2.0 }
+    var animationDuration: TimeInterval { get set }
 }

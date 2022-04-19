@@ -47,8 +47,8 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="circleCompassContainer" destination="P24-z5-98z" id="SOo-5A-nul"/>
-                        <outlet property="needleCompassContainer" destination="L2j-kn-9xU" id="OLJ-Yd-Vg4"/>
+                        <outlet property="arrowCompassContainer" destination="L2j-kn-9xU" id="OLJ-Yd-Vg4"/>
+                        <outlet property="circularCompassContainer" destination="P24-z5-98z" id="mq1-ro-Ajt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

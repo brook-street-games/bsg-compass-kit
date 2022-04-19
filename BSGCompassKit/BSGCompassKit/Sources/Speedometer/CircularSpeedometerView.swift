@@ -18,22 +18,15 @@ public final class CircularSpeedometerView: CircularGaugeView, Speedometer {
         case marker, bar
     }
     
+    // MARK: - Conformance Properties -
+    
+    private(set) public var speed: Double = 0.0
+    public var maxSpeed: Double = 120.0
+    
     // MARK: - Properties -
     
-    public var maxSpeed: Double = 120.0
-    public var measurementSystem: MeasurementSystem = .metric
     /// The type of needle used to indicate speed.
-    public var needleType: NeedleType = .bar
-    
-    // MARK: - Initializers -
-    
-    public override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    public var needleType: NeedleType = .bar { didSet { setNeedsDisplay() }}
     
     // MARK: - Setup -
     
@@ -81,10 +74,13 @@ extension CircularSpeedometerView {
     
     public func setSpeed(_ speed: Double, animated: Bool) {
         
-        primaryLabel.text = getString(from: speed)
+        let confinedSpeed = speed.confine(to: 0...maxSpeed)
+        self.speed = confinedSpeed
+        
+        primaryLabel.text = getString(from: confinedSpeed)
         secondaryLabel.text = measurementSystem.unitOfSpeed
         
-        let speedCenter = speed / maxSpeed
+        let speedCenter = confinedSpeed / maxSpeed
         
         if animated {
             adjustNeedle(center: speedCenter)

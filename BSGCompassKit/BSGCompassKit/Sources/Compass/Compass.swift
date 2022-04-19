@@ -12,6 +12,11 @@ import CoreLocation
 ///
 public protocol Compass: Gauge {
     
+    /// The relative degree value of the compass needle.
+    var degrees: Double { get }
+    /// The relative direction that the compass needle is pointing.
+    var direction: Direction { get }
+    
     ///
     /// Sets the heading to a new value.
     ///
@@ -35,7 +40,7 @@ public protocol Compass: Gauge {
     /// - parameter origin: Coordinates of the current location.
     /// - parameter animated: If true, the compass will animate into position.
     ///
-    func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool)
+    mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool)
     
     ///
     /// Resets the heading to due north.
@@ -53,13 +58,18 @@ extension Compass {
         "\(Int(degrees))\u{00B0}"
     }
     
-    public func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool) {
-        let degrees = GaugeMath.getDegrees(to: destination, from: origin)
-        setHeading(degrees: degrees, animated: animated)
-    }
-    
     public func setHeading(direction: Direction, animated: Bool) {
         setHeading(degrees: direction.degrees, animated: animated)
+    }
+    
+    public mutating func setHeading(destination: CLLocationCoordinate2D, origin: CLLocationCoordinate2D, animated: Bool) {
+        
+        let destinationDegrees = GaugeMath.getDegrees(to: destination, from: origin)
+        setHeading(degrees: destinationDegrees, animated: animated)
+    }
+    
+    func updateHeading(animated: Bool) {
+        setHeading(degrees: degrees, animated: animated)
     }
     
     public func reset(animated: Bool) {
