@@ -21,7 +21,7 @@ Create compass views to display heading information. Also includes a speedometer
 
 ```swift
 // Create needle compass.
-let compassView = NeedleCompassView(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
+let compassView = ArrowCompassView(frame: CGRect(x: 0, y: 0, width: 64, height: 64))
 compassView.needleColor = .black
 compassView.textColor = .yellow
 
@@ -34,8 +34,16 @@ compassView.primaryTextColor = .white
 compassView.secondaryTextColor = .white
 compassView.needleColor = .white
 
-// Set the heading. Call this every time a new heading is obtained from CoreLocation.
+// Set the heading to a degree value. This can be called each time a new *course* value is obtained from CoreLocation.
 compassView.setHeading(degrees: 180, animated: true)
+
+// Set the heading to a directional value.
+compassView.setHeading(direction: .east, animated: true)
+
+// Set the heading to point from one location to another.
+let newYork = CLLocationCoordinate2D(latitude: 40.7128, longitude: -74.0060)
+let sanDiego = CLLocationCoordinate2D(latitude: 32.7157, longitude: -117.1611)
+compassView.setHeading(destination: sanDiego, origin: newYork, animated: true)
 ```
 
 ![BSGCompassKit](../main/BSGCompassKitSample/Assets/Images/compass-example.png)
